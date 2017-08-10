@@ -1,3 +1,24 @@
+require 'net/http'
+require 'json'
+require 'rubygems'
+
+
+def get_gif(search_term)
+  endpoint= "http://api.giphy.com/v1/gifs/search?q=#{search_term.gsub(" ","+")}&api_key=dc6zaTOxFJmzC"
+
+  sample_uri=URI(endpoint)#opens a portal to the data
+  sample_response= Net::HTTP.get(sample_uri)#grabs the data and stores it in sample_response
+
+sample_parsedResponse=JSON.parse(sample_response)#translates from javascript to ruby
+data=sample_parsedResponse["data"]
+data.sample["images"]["fixed_height"]["url"]
+
+end
+
+# puts get_gif("funny cat")
+
+
+
 #life calculator
 def years_alive(birthday)
   #days in the months array
